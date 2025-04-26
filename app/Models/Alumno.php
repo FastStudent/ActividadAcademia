@@ -14,6 +14,6 @@ class Alumno extends Model
 
     public function secciones()
     {
-        return $this->belongsToMany(Seccion::class);
+        return $this->belongsToMany(Seccion::class, 'alumno_seccion')->withTimestamps();
     }
 }

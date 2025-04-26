@@ -9,17 +9,14 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
         Schema::create('alumno_seccion', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('alumno_id')->constrained('alumnos')->onDelete('cascade');
+            $table->foreignId('alumno_id')->constrained()->onDelete('cascade');
+            $table->foreignId('seccion_id')->constrained()->onDelete('cascade');
+            $table->timestamps();
             
-            // $table->foreignId('seccion_id')->constrained('secciones')->onDelete('cascade');
-            // Linea anterior falla por el nombre de la tabla en español, el sistema piensa que será seccions
-
-            $table->unsignedBigInteger('seccion_id');
-            $table->foreign('seccion_id')->references('id')->on('secciones');
         });
     }
 

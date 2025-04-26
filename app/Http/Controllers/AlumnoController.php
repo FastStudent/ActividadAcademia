@@ -71,7 +71,8 @@ class AlumnoController extends Controller
 
     public function actualizarSeccionesAlumno(Request $request, Alumno $alumno)
     {
-        $alumno->secciones()->sync($request->seccion_id);
+        //$alumno->secciones()->sync($request->seccion_id);
+        $alumno->secciones()->syncWithoutDetaching($request->seccion_id);
         return redirect()->route('alumno.show', $alumno);
     }
 

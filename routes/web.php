@@ -1,12 +1,15 @@
 <?php
 
 use App\Http\Controllers\AlumnoController;
+use App\Http\Controllers\SeccionController;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 
 Route::get('/', function () {
     return view('welcome');
 })->name('home');
+
+Route::post('/secciones/{seccion}/asignar-alumnos', [SeccionController::class, 'asignarAlumnos'])->name('seccion.asignarAlumnos');
 
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])

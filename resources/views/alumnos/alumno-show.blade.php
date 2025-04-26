@@ -1,6 +1,6 @@
 <x-layouts.app :title="__('Info Alumno')">
     <div class="flex h-full w-full flex-1 flex-col gap-4 rounded-xl">
-        <div class="relative h-full flex-1 overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-700 p-6 bg-white dark:bg-neutral-900">
+        <div style="background-color: black;" class="relative h-full flex-1 overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-700 p-6 bg-white dark:bg-neutral-900">
 
             {{-- Información del Alumno --}}
             <div class="mb-6">
