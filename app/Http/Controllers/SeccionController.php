@@ -68,25 +68,31 @@ class SeccionController extends Controller
         //
     }
 
-    public function asignarAlumnos(Request $request, Seccion $seccion)
-{
-    // Valida los datos recibidos desde el formulario
-    $request->validate([
-        'alumno_id' => 'required|array', // Asegúrate de que se reciban múltiples IDs de alumnos
-        'alumno_id.*' => 'exists:alumnos,id', // Asegura que cada alumno exista
-    ]);
+    public function asignarAlumnos(Request $request)
+    {
+        // Validar los datos del formulario
+        $validated = $request->validate([
+            'seccion_id' => 'required|exists:secciones,id',
+            'alumno_id' => 'required|exists:alumnos,id',
+        ]);
 
-    // Asigna los alumnos seleccionados a la sección
-    $seccion->alumnos()->attach($request->alumno_id);
+        // Asignar el alumno a la sección
+        $seccion = Seccion::find($validated['seccion_id']);
+        $alumno = Alumno::find($validated['alumno_id']);
 
-    $seccion = Seccion::find(1); // o cualquier lógica para elegir una sección
+        // Verificar la relación antes de guardar
+        //dd($seccion->alumnos()->attach($alumno));
 
-    return view('dashboard', [
-        'seccion' => $seccion,
-        'alumnos' => Alumno::all(),
-    ]);
+        // Asignar y redirigir
+        $seccion->alumnos()->attach($alumno);
 
-    // Redirige con un mensaje de éxito
-    return redirect()->route('secciones.show', $seccion)->with('success', 'Alumnos asignados correctamente.');
-}
+        return redirect()->route('seccion.vistaAsignar')->with('success', 'Alumno asignado exitosamente.');
+    }
+
+    public function vistaAsignar()
+    {
+        $secciones = Seccion::with('alumnos')->get();
+        $alumnos = Alumno::all();
+        return view('secciones.asignar', compact('secciones', 'alumnos'));
+    }
 }
