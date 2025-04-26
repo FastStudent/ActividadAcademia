@@ -8,7 +8,7 @@
             </a>
         </div>
 
-        <a href="{{ route('seccion.vistaAsignar') }}" class="btn btn-primary">
+        <a href="{{ route('seccion.vistaAsignar') }}" style="background-color: black;" class="inline-block rounded-lg bg-blue-600 px-4 py-2 text-white hover:bg-blue-700 transition-colors">
             Asignar Alumnos a Secciones
         </a>
 
